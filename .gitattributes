@@ -1,0 +1,40 @@
+# Normalize all text files to LF in the repository
+* text=auto eol=lf
+
+# C/C++ source
+*.c     text eol=lf
+*.cpp   text eol=lf
+*.h     text eol=lf
+*.hpp   text eol=lf
+
+# CMake
+CMakeLists.txt  text eol=lf
+*.cmake         text eol=lf
+
+# Config and tooling
+*.json          text eol=lf
+*.yaml          text eol=lf
+*.yml           text eol=lf
+*.md            text eol=lf
+.clang-format   text eol=lf
+.clang-tidy     text eol=lf
+.gitattributes  text eol=lf
+.gitignore      text eol=lf
+.editorconfig   text eol=lf
+
+# Shell scripts
+*.sh    text eol=lf
+
+# Windows scripts stay CRLF on Windows
+*.bat   text eol=crlf
+*.cmd   text eol=crlf
+
+# True binary files — never touch line endings
+*.png   binary
+*.jpg   binary
+*.exe   binary
+*.a     binary
+*.so    binary
+*.dylib binary
+*.zip   binary
+*.pdf   binary
