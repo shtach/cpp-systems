@@ -1,0 +1,85 @@
+{
+    "version": 3,
+    "configurePresets": [
+        {
+            "name": "base",
+            "hidden": true,
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+            }
+        },
+
+        {
+            "name": "debug",
+            "inherits": "base",
+            "displayName": "Debug",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+
+        {
+            "name": "release",
+            "inherits": "base",
+            "displayName": "Release",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_INTERPROCEDURAL_OPTIMIZATION": "ON"
+            }
+        },
+
+        {
+            "name": "asan",
+            "inherits": "debug",
+            "displayName": "Address Sanitizer",
+            "cacheVariables": {
+                "ENABLE_ASAN": "ON"
+            }
+        },
+
+        {
+            "name": "ubsan",
+            "inherits": "debug",
+            "displayName": "Undefined Behavior Sanitizer",
+            "cacheVariables": {
+                "ENABLE_UBSAN": "ON"
+            }
+        },
+
+        {
+            "name": "tidy",
+            "inherits": "debug",
+            "displayName": "Clang-Tidy",
+            "cacheVariables": {
+                "ENABLE_CLANG_TIDY": "ON"
+            }
+        }
+    ],
+
+    "buildPresets": [
+        {"name": "debug", "configurePreset": "debug"},
+        {"name": "release", "configurePreset": "release"},
+        {"name": "asan", "configurePreset": "asan"},
+        {"name": "ubsan", "configurePreset": "ubsan"}
+    ],
+
+    "testPresets": [
+        {
+            "name": "debug",
+            "configurePreset": "debug",
+            "output": {
+                "outputOnFailure": true
+            }
+        },
+
+        {
+            "name": "asan",
+            "configurePreset": "asan",
+            "output": {
+                "outputOnFailure": true
+            }
+        }
+    ]
+}
