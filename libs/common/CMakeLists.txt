@@ -1,5 +1,5 @@
 add_library(common STATIC
-    src/log.cpp
+    src/console_logger.cpp
 )
 
 target_compile_features(common PUBLIC cxx_std_23)
