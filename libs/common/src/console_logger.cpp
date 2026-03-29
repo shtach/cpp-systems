@@ -1,11 +1,12 @@
-#include "console_logger.h"
+#include "common/console_logger.h"
 
 #include <format>
+#include "common/logger.h"
 
 namespace common {
 
     namespace {
-        const char* toString(LogLevel level) {
+        const char* ToString(LogLevel level) {
             switch (level) {
                 case LogLevel::DEBUG:   return "DEBUG";
                 case LogLevel::INFO:    return "INFO";
@@ -19,15 +20,16 @@ namespace common {
     ConsoleLogger::ConsoleLogger(std::ostream& output) : output_(output) {}
 
     void ConsoleLogger::log(LogLevel level, std::string_view message) {
-        LogLevel currentLevel;
+        LogLevel CurrentLevel {};
         {
             std::lock_guard<std::mutex> lock(mutex_);
-            currentLevel = level_;
+            CurrentLevel = level_;
         }
 
-        if (level < currentLevel) return;
+        if (level < CurrentLevel) 
+            return;
 
-        std::string formatted = std::format("[{}] {}", toString(level), message);
+        std::string formatted = std::format("[{}] {}", ToString(level), message);
 
         {
             std::lock_guard<std::mutex> lock(mutex_);
